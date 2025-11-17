@@ -143,7 +143,8 @@ contract MockOracle is Ownable, Pausable, IOracle {
         require(block.timestamp >= lastBalanceUpdateTime + MIN_UPDATE_INTERVAL, "MockOracle: Rate limited");
 
         uint256 maxChange = (mockValidatorBalance * MAX_BALANCE_CHANGE_BPS) / 10000;
-        uint256 actualChange = balance > mockValidatorBalance ? balance - mockValidatorBalance : mockValidatorBalance - balance;
+        uint256 actualChange =
+            balance > mockValidatorBalance ? balance - mockValidatorBalance : mockValidatorBalance - balance;
         require(actualChange <= maxChange, "MockOracle: Balance change too large");
 
         mockValidatorBalance = balance;
@@ -178,7 +179,8 @@ contract MockOracle is Ownable, Pausable, IOracle {
             require(block.timestamp >= lastBalanceUpdateTime + MIN_UPDATE_INTERVAL, "MockOracle: Rate limited");
 
             uint256 maxChange = (mockValidatorBalance * MAX_BALANCE_CHANGE_BPS) / 10000;
-            uint256 actualChange = balance > mockValidatorBalance ? balance - mockValidatorBalance : mockValidatorBalance - balance;
+            uint256 actualChange =
+                balance > mockValidatorBalance ? balance - mockValidatorBalance : mockValidatorBalance - balance;
             require(actualChange <= maxChange, "MockOracle: Balance change too large");
         }
 
@@ -198,7 +200,8 @@ contract MockOracle is Ownable, Pausable, IOracle {
             require(block.timestamp >= lastBalanceUpdateTime + MIN_UPDATE_INTERVAL, "MockOracle: Rate limited");
 
             uint256 maxChange = (mockActiveBalance * MAX_BALANCE_CHANGE_BPS) / 10000;
-            uint256 actualChange = balance > mockActiveBalance ? balance - mockActiveBalance : mockActiveBalance - balance;
+            uint256 actualChange =
+                balance > mockActiveBalance ? balance - mockActiveBalance : mockActiveBalance - balance;
             require(actualChange <= maxChange, "MockOracle: Balance change too large");
         }
 

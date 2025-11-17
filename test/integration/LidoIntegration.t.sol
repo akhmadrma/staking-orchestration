@@ -116,11 +116,7 @@ contract LidoIntegrationTest is Test {
         });
 
         oracle.submitReport(data);
-        lido.handleOracleReport(
-            lido.getTotalPooledEther() + 10 ether,
-            lido.getTotalShares(),
-            TIME_ADVANCE
-        );
+        lido.handleOracleReport(lido.getTotalPooledEther() + 10 ether, lido.getTotalShares(), TIME_ADVANCE);
         vm.stopPrank();
 
         // Verify rewards applied

@@ -8,11 +8,11 @@ pragma solidity ^0.8.20;
  */
 interface IOracle {
     struct ReportData {
-        uint256 epochId;              // Epoch identifier
-        uint256 totalActiveBalance;   // Total active validator balance
-        uint256 totalValidatorBalance;// Total validator balance
-        uint256 totalRewards;         // Total rewards for the epoch
-        uint256 timestamp;            // Report timestamp
+        uint256 epochId; // Epoch identifier
+        uint256 totalActiveBalance; // Total active validator balance
+        uint256 totalValidatorBalance; // Total validator balance
+        uint256 totalRewards; // Total rewards for the epoch
+        uint256 timestamp; // Report timestamp
     }
 
     /**

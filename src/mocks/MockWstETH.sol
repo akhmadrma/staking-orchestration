@@ -48,12 +48,7 @@ contract MockWstETH is ERC20, Ownable, Pausable, ReentrancyGuard, IWstETH {
      * @param stethAmount Amount of stETH tokens to wrap
      * @return wstethAmount Amount of wstETH tokens received
      */
-    function wrap(uint256 stethAmount)
-        external
-        nonReentrant
-        whenNotPaused
-        returns (uint256 wstethAmount)
-    {
+    function wrap(uint256 stethAmount) external nonReentrant whenNotPaused returns (uint256 wstethAmount) {
         if (stethAmount < MIN_AMOUNT) revert MockWstETH_ZeroAmount();
 
         // Calculate equivalent wstETH amount based on current ratio
@@ -95,12 +90,7 @@ contract MockWstETH is ERC20, Ownable, Pausable, ReentrancyGuard, IWstETH {
      * @param wstethAmount Amount of wstETH tokens to unwrap
      * @return stethAmount Amount of stETH tokens received
      */
-    function unwrap(uint256 wstethAmount)
-        external
-        nonReentrant
-        whenNotPaused
-        returns (uint256 stethAmount)
-    {
+    function unwrap(uint256 wstethAmount) external nonReentrant whenNotPaused returns (uint256 stethAmount) {
         if (wstethAmount < MIN_AMOUNT) revert MockWstETH_ZeroAmount();
 
         // Calculate equivalent stETH amount based on current ratio

@@ -109,10 +109,7 @@ contract MockLido is ERC20, Ownable, Pausable, ReentrancyGuard, ILido {
      * @notice Initializes the MockLido contract
      * @param _oracle Address of the oracle contract
      */
-    constructor(address _oracle)
-        ERC20("Mock Staked Ether", "stETH")
-        Ownable(msg.sender)
-    {
+    constructor(address _oracle) ERC20("Mock Staked Ether", "stETH") Ownable(msg.sender) {
         if (_oracle == address(0)) revert MockLido_InvalidOracle();
         oracle = IOracle(_oracle);
         lastRewardTimestamp = block.timestamp;
@@ -127,13 +124,7 @@ contract MockLido is ERC20, Ownable, Pausable, ReentrancyGuard, ILido {
      * @return shares Amount of shares minted to the caller
      * @dev Implements shares-based accounting similar to real Lido
      */
-    function submit(address _referral)
-        external
-        payable
-        nonReentrant
-        whenNotPaused
-        returns (uint256 shares)
-    {
+    function submit(address _referral) external payable nonReentrant whenNotPaused returns (uint256 shares) {
         if (msg.value == 0) revert MockLido_ZeroAmount();
 
         // Calculate shares based on current ratio
@@ -167,12 +158,7 @@ contract MockLido is ERC20, Ownable, Pausable, ReentrancyGuard, ILido {
      * @return requestId ID of the withdrawal request
      * @dev In real Lido, this would queue the withdrawal for processing
      */
-    function requestWithdrawal(uint256 stethAmount)
-        external
-        nonReentrant
-        whenNotPaused
-        returns (uint256 requestId)
-    {
+    function requestWithdrawal(uint256 stethAmount) external nonReentrant whenNotPaused returns (uint256 requestId) {
         if (stethAmount == 0) revert MockLido_ZeroAmount();
         if (balanceOf(msg.sender) < stethAmount) revert MockLido_InsufficientShares();
 
@@ -227,11 +213,10 @@ contract MockLido is ERC20, Ownable, Pausable, ReentrancyGuard, ILido {
      * @param newTotalShares New total shares (if changed)
      * @param timeElapsed Time elapsed since last report
      */
-    function handleOracleReport(
-        uint256 postTotalPooledEther,
-        uint256 newTotalShares,
-        uint256 timeElapsed
-    ) external onlyOracle {
+    function handleOracleReport(uint256 postTotalPooledEther, uint256 newTotalShares, uint256 timeElapsed)
+        external
+        onlyOracle
+    {
         if (postTotalPooledEther < totalPooledEther) revert MockLido_InvalidRewardAmount();
 
         uint256 rewards = postTotalPooledEther - totalPooledEther;

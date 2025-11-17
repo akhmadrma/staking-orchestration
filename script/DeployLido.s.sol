@@ -26,11 +26,7 @@ contract DeployLido is Script {
     event LidoDeployed(address indexed lido, address indexed oracle, address indexed deployer);
     event WstETHDeployed(address indexed wstETH, address indexed lido, address indexed deployer);
     event DeploymentComplete(
-        address indexed oracle,
-        address indexed lido,
-        address indexed wstETH,
-        address deployer,
-        uint256 timestamp
+        address indexed oracle, address indexed lido, address indexed wstETH, address deployer, uint256 timestamp
     );
 
     function run() external {

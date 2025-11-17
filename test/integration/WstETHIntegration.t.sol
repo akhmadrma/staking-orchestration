@@ -105,11 +105,7 @@ contract WstETHIntegrationTest is Test {
         vm.startPrank(owner);
         oracle.simulateRewards(VALIDATOR_COUNT, APR);
         uint256 rewardAmount = 10 ether;
-        lido.handleOracleReport(
-            lido.getTotalPooledEther() + rewardAmount,
-            lido.getTotalShares(),
-            TIME_ADVANCE
-        );
+        lido.handleOracleReport(lido.getTotalPooledEther() + rewardAmount, lido.getTotalShares(), TIME_ADVANCE);
         vm.stopPrank();
 
         // Both users should benefit proportionally from rewards
@@ -140,11 +136,7 @@ contract WstETHIntegrationTest is Test {
 
         vm.startPrank(owner);
         oracle.simulateRewards(VALIDATOR_COUNT, APR);
-        lido.handleOracleReport(
-            lido.getTotalPooledEther() + 2 ether,
-            lido.getTotalShares(),
-            TIME_ADVANCE / 2
-        );
+        lido.handleOracleReport(lido.getTotalPooledEther() + 2 ether, lido.getTotalShares(), TIME_ADVANCE / 2);
         vm.stopPrank();
 
         // User 2 wraps later (gets fewer wstETH for same stETH)
@@ -160,11 +152,7 @@ contract WstETHIntegrationTest is Test {
 
         vm.startPrank(owner);
         oracle.simulateRewards(VALIDATOR_COUNT, APR);
-        lido.handleOracleReport(
-            lido.getTotalPooledEther() + 3 ether,
-            lido.getTotalShares(),
-            TIME_ADVANCE / 2
-        );
+        lido.handleOracleReport(lido.getTotalPooledEther() + 3 ether, lido.getTotalShares(), TIME_ADVANCE / 2);
         vm.stopPrank();
 
         // Both unwrap - user1 should get proportionally more rewards
@@ -231,11 +219,7 @@ contract WstETHIntegrationTest is Test {
         vm.warp(block.timestamp + TIME_ADVANCE);
         vm.startPrank(owner);
         oracle.simulateRewards(VALIDATOR_COUNT, APR);
-        lido.handleOracleReport(
-            lido.getTotalPooledEther() + 20 ether,
-            lido.getTotalShares(),
-            TIME_ADVANCE
-        );
+        lido.handleOracleReport(lido.getTotalPooledEther() + 20 ether, lido.getTotalShares(), TIME_ADVANCE);
         vm.stopPrank();
 
         // Verify ratio consistency after rewards
@@ -351,11 +335,7 @@ contract WstETHIntegrationTest is Test {
         vm.warp(block.timestamp + TIME_ADVANCE);
         vm.startPrank(owner);
         oracle.simulateRewards(VALIDATOR_COUNT, APR);
-        lido.handleOracleReport(
-            lido.getTotalPooledEther() + 5 ether,
-            lido.getTotalShares(),
-            TIME_ADVANCE
-        );
+        lido.handleOracleReport(lido.getTotalPooledEther() + 5 ether, lido.getTotalShares(), TIME_ADVANCE);
         vm.stopPrank();
 
         // User2 can unwrap and receive rewards
@@ -383,11 +363,7 @@ contract WstETHIntegrationTest is Test {
             vm.warp(block.timestamp + TIME_ADVANCE / 3);
             vm.startPrank(owner);
             oracle.simulateRewards(VALIDATOR_COUNT, APR);
-            lido.handleOracleReport(
-                lido.getTotalPooledEther() + 2 ether,
-                lido.getTotalShares(),
-                TIME_ADVANCE / 3
-            );
+            lido.handleOracleReport(lido.getTotalPooledEther() + 2 ether, lido.getTotalShares(), TIME_ADVANCE / 3);
             vm.stopPrank();
 
             // Unwrap
@@ -422,11 +398,7 @@ contract WstETHIntegrationTest is Test {
         vm.warp(block.timestamp + TIME_ADVANCE);
         vm.startPrank(owner);
         oracle.simulateRewards(VALIDATOR_COUNT, APR);
-        lido.handleOracleReport(
-            lido.getTotalPooledEther() + 5 ether,
-            lido.getTotalShares(),
-            TIME_ADVANCE
-        );
+        lido.handleOracleReport(lido.getTotalPooledEther() + 5 ether, lido.getTotalShares(), TIME_ADVANCE);
         vm.stopPrank();
 
         // Operations should fail while paused
