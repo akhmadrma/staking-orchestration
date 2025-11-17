@@ -64,10 +64,21 @@ contract MockWstETH is ERC20, Ownable, Pausable, ReentrancyGuard, IWstETH {
             if (stethBalance == 0) {
                 revert MockWstETH_ZeroWstETHReturned();
             }
+            // Prevent zero-division and ensure reasonable input
+            require(stethBalance >= MIN_AMOUNT, "MockWstETH: Insufficient contract balance");
+            require(stethAmount <= stethBalance, "MockWstETH: Amount exceeds contract balance");
+
             wstethAmount = (stethAmount * totalSupply()) / stethBalance;
+
+            // Ensure minimum return amount
+            if (wstethAmount == 0) {
+                revert MockWstETH_ZeroWstETHReturned();
+            }
         }
 
-        if (wstethAmount == 0) revert MockWstETH_ZeroWstETHReturned();
+        // Additional sanity checks
+        require(wstethAmount > 0, "MockWstETH: Zero wstETH amount returned");
+        require(wstethAmount <= totalSupply() + stethAmount, "MockWstETH: Excessive wstETH amount");
 
         // Transfer stETH from caller to this contract
         IERC20(address(stETH)).transferFrom(msg.sender, address(this), stethAmount);
@@ -168,6 +179,8 @@ contract MockWstETH is ERC20, Ownable, Pausable, ReentrancyGuard, IWstETH {
      * @return wstethAmount Equivalent amount of wstETH tokens
      */
     function getWstETHByStETH(uint256 stethAmount) external view returns (uint256 wstethAmount) {
+        if (stethAmount == 0) return 0;
+
         if (totalSupply() == 0) {
             // When no wstETH exists, conversion is 1:1
             return stethAmount;
@@ -176,6 +189,7 @@ contract MockWstETH is ERC20, Ownable, Pausable, ReentrancyGuard, IWstETH {
         if (stethBalance == 0) {
             return 0;
         }
+        // Safe division with zero-division protection
         return (stethAmount * totalSupply()) / stethBalance;
     }
 

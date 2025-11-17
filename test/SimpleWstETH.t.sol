@@ -44,10 +44,10 @@ contract SimpleWstETHTest is Test {
 
         vm.stopPrank();
 
-        // Set initial oracle mock values
+        // Set initial oracle mock values (bypass rate limits for testing)
         vm.startPrank(owner);
-        oracle.setMockValidatorBalance(32 ether);
-        oracle.setMockActiveBalance(32 ether);
+        oracle.setMockValidatorBalanceForTesting(32 ether, true);
+        oracle.setMockActiveBalanceForTesting(32 ether, true);
         vm.stopPrank();
 
         // Give user ETH and get stETH

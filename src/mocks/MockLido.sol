@@ -154,8 +154,9 @@ contract MockLido is ERC20, Ownable, Pausable, ReentrancyGuard, ILido {
             emit FeeCollected(owner(), fee);
         }
 
-        // Simulate rewards after submission
-        _simulateRewards();
+        // Note: _simulateRewards() commented out to prevent gas issues in testing
+        // In production, this would be called via oracle reports
+        // _simulateRewards();
 
         emit Submitted(msg.sender, _referral, msg.value, shares);
     }
